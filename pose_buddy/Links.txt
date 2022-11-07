@@ -1,0 +1,5 @@
+Potential solutions
+
+- https://commons.wikimedia.org/wiki/Commons:Image_annotations
+- http://make.opendata.ch/wiki/project:league_of_nations_pictures_annotation
+- https://towardsdatascience.com/extracting-faces-using-opencv-face-detection-neural-network-475c5cd0c260

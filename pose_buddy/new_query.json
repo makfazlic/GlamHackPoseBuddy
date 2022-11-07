@@ -1,0 +1,95 @@
+[
+    {
+        '$project': {
+            'shoulders': {
+                '$arrayElemAt': [
+                    '$Vectors', 0
+                ]
+            }, 
+            'rightUpperArm': {
+                '$arrayElemAt': [
+                    '$Vectors', 1
+                ]
+            }, 
+            'leftUpperArm': {
+                '$arrayElemAt': [
+                    '$Vectors', 2
+                ]
+            }, 
+            'rightForearm': {
+                '$arrayElemAt': [
+                    '$Vectors', 3
+                ]
+            }, 
+            'leftForearm': {
+                '$arrayElemAt': [
+                    '$Vectors', 4
+                ]
+            }, 
+            'hip': {
+                '$arrayElemAt': [
+                    '$Vectors', 5
+                ]
+            }, 
+            'rightWing': {
+                '$arrayElemAt': [
+                    '$Vectors', 6
+                ]
+            }, 
+            'leftWing': {
+                '$arrayElemAt': [
+                    '$Vectors', 7
+                ]
+            }, 
+            'rightUpperLeg': {
+                '$arrayElemAt': [
+                    '$Vectors', 8
+                ]
+            }, 
+            'leftUpperLeg': {
+                '$arrayElemAt': [
+                    '$Vectors', 9
+                ]
+            }, 
+            'rightShin': {
+                '$arrayElemAt': [
+                    '$Vectors', 10
+                ]
+            }, 
+            'leftShin': {
+                '$arrayElemAt': [
+                    '$Vectors', 11
+                ]
+            }
+        }
+    }, {
+        '$project': {
+            'featureError': {
+                '$add': [
+                    '$errorShoulders', '$errorRightUpperArm', '$errorLeftUpperArm', '$errorRightForearm', '$errorLeftForearm', '$errorHip', '$errorRightWing', '$errorLeftWing', '$errorRightUpperLeg', '$errorLeftUpperLeg', '$errorRightShin', '$errorLeftShin'
+                ]
+            }
+        }
+    }, {
+        '$addFields': {
+            'error': {
+                '$multiply': [
+                    '$featureError', 1000
+                ]
+            }
+        }
+    }, {
+        '$addFields': {
+            'error': {
+                '$convert': {
+                    'input': '$error', 
+                    'to': 'int'
+                }
+            }
+        }
+    }, {
+        '$sort': {
+            'error': 1
+        }
+    }
+]
